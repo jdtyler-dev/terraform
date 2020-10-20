@@ -36,33 +36,54 @@ func TestEnsureProviderVersions_local_source(t *testing.T) {
 	installer := NewInstaller(dir, source)
 
 	tests := map[string]struct {
-		provider string
-		version  string
-		wantHash getproviders.Hash // getproviders.NilHash if not expected to be installed
-		err      string
+		provider   string
+		constraint string
+		version    string
+		locksSrc   string
+		wantHash   getproviders.Hash // getproviders.NilHash if not expected to be installed
+		err        string
 	}{
 		"install-unpacked": {
-			provider: "null",
+			provider:   "null",
+			constraint: "2.0.0",
+			version:    "2.0.0",
+			wantHash:   getproviders.HashScheme1.New("qjsREM4DqEWECD43FcPqddZ9oxCG+IaMTxvWPciS05g="),
+		},
+		"install-unpacked-wrong-hash": {
+			provider:   "null",
+			constraint: ">= 2.0.0",
+			locksSrc: `
+				provider "registry.terraform.io/hashicorp/null" {
+					version = "2.0.0"
+					hashes = [
+						"h1:nope",
+					]
+				}
+			`,
 			version:  "2.0.0",
 			wantHash: getproviders.HashScheme1.New("qjsREM4DqEWECD43FcPqddZ9oxCG+IaMTxvWPciS05g="),
+			err:      "wrong hash",
 		},
 		"invalid-zip-file": {
-			provider: "null",
-			version:  "2.1.0",
-			wantHash: getproviders.NilHash,
-			err:      "zip: not a valid zip file",
+			provider:   "null",
+			constraint: "2.1.0",
+			version:    "2.1.0",
+			wantHash:   getproviders.NilHash,
+			err:        "zip: not a valid zip file",
 		},
 		"version-constraint-unmet": {
-			provider: "null",
-			version:  "2.2.0",
-			wantHash: getproviders.NilHash,
-			err:      "no available releases match the given constraints 2.2.0",
+			provider:   "null",
+			constraint: "2.2.0",
+			version:    "2.2.0",
+			wantHash:   getproviders.NilHash,
+			err:        "no available releases match the given constraints 2.2.0",
 		},
 		"missing-executable": {
-			provider: "missing/executable",
-			version:  "2.0.0",
-			wantHash: getproviders.NilHash, // installation fails for a provider with no executable
-			err:      "provider binary not found: could not find executable file starting with terraform-provider-executable",
+			provider:   "missing/executable",
+			constraint: "2.0.0",
+			version:    "2.0.0",
+			wantHash:   getproviders.NilHash, // installation fails for a provider with no executable
+			err:        "provider binary not found: could not find executable file starting with terraform-provider-executable",
 		},
 	}
 
@@ -71,19 +92,24 @@ func TestEnsureProviderVersions_local_source(t *testing.T) {
 			ctx := context.TODO()
 
 			provider := addrs.MustParseProviderSourceString(test.provider)
-			versionConstraint := getproviders.MustParseVersionConstraints(test.version)
+			versionConstraint := getproviders.MustParseVersionConstraints(test.constraint)
 			version := getproviders.MustParseVersion(test.version)
 			reqs := getproviders.Requirements{
 				provider: versionConstraint,
 			}
 
-			newLocks, err := installer.EnsureProviderVersions(ctx, depsfile.NewLocks(), reqs, InstallNewProvidersOnly)
+			previousLocks, locksDiags := depsfile.LoadLocksFromBytes([]byte(test.locksSrc), "test.lock.hcl")
+			if locksDiags.HasErrors() {
+				t.Error(locksDiags.Err().Error())
+			}
+
+			newLocks, err := installer.EnsureProviderVersions(ctx, previousLocks, reqs, InstallNewProvidersOnly)
 			gotProviderlocks := newLocks.AllProviders()
 			wantProviderLocks := map[addrs.Provider]*depsfile.ProviderLock{
 				provider: depsfile.NewProviderLock(
 					provider,
 					version,
-					getproviders.MustParseVersionConstraints("= 2.0.0"),
+					versionConstraint,
 					[]getproviders.Hash{
 						test.wantHash,
 					},
