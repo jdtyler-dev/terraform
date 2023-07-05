@@ -1,7 +1,7 @@
 module github.com/hashicorp/terraform
 
 require (
-	cloud.google.com/go v0.45.1
+	cloud.google.com/go/storage v1.29.0
 	github.com/Azure/azure-sdk-for-go v45.0.0+incompatible
 	github.com/Azure/go-autorest/autorest v0.11.3
 	github.com/Azure/go-ntlmssp v0.0.0-20200615164410-66371956d46c // indirect
@@ -23,9 +23,7 @@ require (
 	github.com/bgentry/speakeasy v0.1.0
 	github.com/bmatcuk/doublestar v1.1.5
 	github.com/boltdb/bolt v1.3.1 // indirect
-	github.com/chzyer/logex v1.1.10 // indirect
 	github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e
-	github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1 // indirect
 	github.com/coreos/bbolt v1.3.0 // indirect
 	github.com/coreos/etcd v3.3.10+incompatible
 	github.com/coreos/go-semver v0.2.0 // indirect
@@ -36,18 +34,16 @@ require (
 	github.com/dylanmei/winrmtest v0.0.0-20190225150635-99b7fe2fddf1
 	github.com/go-test/deep v1.0.3
 	github.com/gofrs/uuid v3.3.0+incompatible // indirect
-	github.com/golang/groupcache v0.0.0-20180513044358-24b0969c4cb7 // indirect
-	github.com/golang/mock v1.3.1
-	github.com/golang/protobuf v1.3.4
-	github.com/google/go-cmp v0.5.2
-	github.com/google/uuid v1.1.1
+	github.com/golang/mock v1.6.0
+	github.com/golang/protobuf v1.5.3
+	github.com/google/go-cmp v0.5.9
+	github.com/google/uuid v1.3.0
 	github.com/gophercloud/gophercloud v0.10.1-0.20200424014253-c3bfe50899e5
 	github.com/gophercloud/utils v0.0.0-20200423144003-7c72efc7435d
 	github.com/gopherjs/gopherjs v0.0.0-20181017120253-0766667cb4d1 // indirect
 	github.com/gorilla/websocket v1.4.0 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.0.0 // indirect
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0 // indirect
-	github.com/grpc-ecosystem/grpc-gateway v1.8.5 // indirect
 	github.com/hashicorp/aws-sdk-go-base v0.6.0
 	github.com/hashicorp/consul v0.0.0-20171026175957-610f3c86a089
 	github.com/hashicorp/errwrap v1.0.0
@@ -85,7 +81,7 @@ require (
 	github.com/masterzen/simplexml v0.0.0-20190410153822-31eea3082786 // indirect
 	github.com/masterzen/winrm v0.0.0-20200615185753-c42b5136ff88
 	github.com/mattn/go-colorable v0.1.8
-	github.com/mattn/go-isatty v0.0.12
+	github.com/mattn/go-isatty v0.0.16
 	github.com/mattn/go-shellwords v1.0.4
 	github.com/miekg/dns v1.0.8 // indirect
 	github.com/mitchellh/cli v1.1.0
@@ -110,7 +106,7 @@ require (
 	github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d // indirect
 	github.com/smartystreets/goconvey v0.0.0-20180222194500-ef6db91d284a // indirect
 	github.com/soheilhy/cmux v0.1.4 // indirect
-	github.com/spf13/afero v1.2.2
+	github.com/spf13/afero v1.9.2
 	github.com/tencentcloud/tencentcloud-sdk-go v3.0.82+incompatible
 	github.com/tencentyun/cos-go-sdk-v5 v0.0.0-20190808065407-f07404cefc8c
 	github.com/tmc/grpc-websocket-proxy v0.0.0-20171017195756-830351dc03c6 // indirect
@@ -124,15 +120,17 @@ require (
 	go.uber.org/atomic v1.3.2 // indirect
 	go.uber.org/multierr v1.1.0 // indirect
 	go.uber.org/zap v1.9.1 // indirect
-	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
-	golang.org/x/mod v0.2.0
-	golang.org/x/net v0.0.0-20200602114024-627f9648deb9
-	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
-	golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd
-	golang.org/x/text v0.3.2
-	golang.org/x/tools v0.0.0-20191203134012-c197fd4bf371
-	google.golang.org/api v0.9.0
-	google.golang.org/grpc v1.27.1
+	golang.org/x/crypto v0.0.0-20211108221036-ceb1ce70b4fa
+	golang.org/x/mod v0.9.0
+	golang.org/x/net v0.9.0
+	golang.org/x/oauth2 v0.7.0
+	golang.org/x/sys v0.7.0
+	golang.org/x/text v0.9.0
+	golang.org/x/tools v0.7.0
+	golang.org/x/tools/cmd/cover v0.1.0-deprecated
+	google.golang.org/api v0.114.0
+	google.golang.org/grpc v1.54.0
+	google.golang.org/grpc/examples v0.0.0-20230705174746-11feb0a9afd8 // indirect
 	gopkg.in/ini.v1 v1.42.0 // indirect
 	gopkg.in/yaml.v2 v2.2.8
 	k8s.io/api v0.0.0-20190620084959-7cf5895f2711
