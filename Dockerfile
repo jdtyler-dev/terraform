@@ -7,7 +7,7 @@
 # the officially-released binary from releases.hashicorp.com and are
 # built by the (closed-source) official release process.
 
-FROM golang:alpine
+FROM golang:1.23rc2-alpine3.20
 LABEL maintainer="HashiCorp Terraform Team <terraform@hashicorp.com>"
 
 RUN apk add --no-cache git bash openssh
