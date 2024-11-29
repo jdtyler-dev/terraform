@@ -124,13 +124,13 @@ require (
 	go.uber.org/atomic v1.3.2 // indirect
 	go.uber.org/multierr v1.1.0 // indirect
 	go.uber.org/zap v1.9.1 // indirect
-	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
-	golang.org/x/mod v0.2.0
-	golang.org/x/net v0.0.0-20200602114024-627f9648deb9
+	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
+	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4
+	golang.org/x/net v0.7.0
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
-	golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd
-	golang.org/x/text v0.3.2
-	golang.org/x/tools v0.0.0-20191203134012-c197fd4bf371
+	golang.org/x/sys v0.5.0
+	golang.org/x/text v0.7.0
+	golang.org/x/tools v0.1.12
 	google.golang.org/api v0.9.0
 	google.golang.org/grpc v1.27.1
 	gopkg.in/ini.v1 v1.42.0 // indirect
